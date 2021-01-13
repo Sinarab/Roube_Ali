@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/bg/fundo5.png" type="Texture" id=1]
+[ext_resource path="res://assets/audios/ticking.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/enemis/JovemAli.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/enemis/peixito.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/controle/TouchJoyStick.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/player/Pata.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/interface/Level.gd" type="Script" id=7]
+[ext_resource path="res://src/interface/UI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/objects/LimitAreaNode2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/bg/sombra3.png" type="Texture" id=10]
+[ext_resource path="res://src/levels/Levels2.tscn" type="PackedScene" id=11]
+
+[node name="Levels" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 128.0 ],
+"_edit_use_anchors_": false
+}
+next_scene = ExtResource( 11 )
+num_peixitos = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="UI" instance=ExtResource( 8 )]
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="ColorRect" type="TextureRect" parent="BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Peixito" parent="." instance=ExtResource( 4 )]
+position = Vector2( 744, 352 )
+
+[node name="Peixito2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 952, 696 )
+
+[node name="Pata" parent="." instance=ExtResource( 6 )]
+position = Vector2( 928, 982 )
+
+[node name="JovemAli" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 123.2 )
+
+[node name="TouchJoyStick" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1736, 928 )
+
+[node name="Audio_Level" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -20.0
+
+[node name="LimitAreaNode2D" parent="." instance=ExtResource( 9 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.933333, 0.894118, 0.533333, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 136.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="tree_entered" from="." to="." method="_on_Levels_tree_entered"]
+[connection signal="moved" from="Pata" to="JovemAli" method="_on_Pata_moved"]
+[connection signal="stoped" from="Pata" to="JovemAli" method="_on_Pata_stoped"]
+[connection signal="joysctick_moved" from="TouchJoyStick" to="Pata" method="_on_TouchJoyStick_joysctick_moved"]
+[connection signal="joysctick_stoped" from="TouchJoyStick" to="Pata" method="_on_TouchJoyStick_joysctick_stoped"]

@@ -1,0 +1,150 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/bg/sombra3.png" type="Texture" id=1]
+[ext_resource path="res://src/player/Pata.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/enemis/peixito.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/Title_DynamicFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/fonts/IndieFlower.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://src/controle/TouchJoyStick.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/icons/arrow1.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/Eyes_emoji.png" type="Texture" id=8]
+[ext_resource path="res://src/objects/LimitAreaNode2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/interface/Buttons/CallSceneBtn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/interface/Buttons/QuitBtn.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/icons/pet_house.png" type="Texture" id=14]
+[ext_resource path="res://src/interface/Instructions.gd" type="Script" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[node name="Instrutions" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.94902, 0.92549, 0.333333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/TextureRect"]
+modulate = Color( 1, 1, 1, 0.52549 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 280.0
+margin_top = 352.0
+margin_right = -276.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 280.0
+margin_top = 104.0
+margin_right = 1624.0
+margin_bottom = 432.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
+text = "Arraste o peixito 
+para fora da tela!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 680.0
+margin_right = 464.0
+margin_bottom = 908.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
+text = "Cuidado, o jovem
+ alienígena, Alí,
+ está vigiando!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Peixito" parent="." instance=ExtResource( 3 )]
+position = Vector2( 944, 560 )
+
+[node name="Pata" parent="." instance=ExtResource( 2 )]
+position = Vector2( 928, 872 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1706.55, 499.405 )
+scale = Vector2( 0.558453, -0.584823 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 229.932, 472.496 )
+scale = Vector2( 0.558453, -0.584823 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 248, 952 )
+scale = Vector2( 0.15, 0.145161 )
+texture = ExtResource( 8 )
+
+[node name="TouchJoyStick" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1724.64, 856.547 )
+
+[node name="LimitAreaNode2D" parent="." instance=ExtResource( 9 )]
+
+[node name="QuitBtn" parent="." instance=ExtResource( 11 )]
+
+[node name="CallSceneBtn" parent="." instance=ExtResource( 10 )]
+theme = SubResource( 3 )
+next_scene_path = "res://src/interface/InitalScreen.tscn"
+
+[node name="Level1" parent="." instance=ExtResource( 10 )]
+visible = false
+margin_left = 759.545
+margin_top = 555.364
+margin_right = 1133.55
+margin_bottom = 843.364
+theme = SubResource( 3 )
+icon = ExtResource( 14 )
+next_scene_path = "res://src/levels/Levels1.tscn"
+
+[node name="Label3" type="Label" parent="Level1"]
+margin_left = 144.0
+margin_top = 248.0
+margin_right = 256.0
+margin_bottom = 395.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
+text = "01"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="joysctick_moved" from="TouchJoyStick" to="Pata" method="_on_TouchJoyStick_joysctick_moved"]
+[connection signal="joysctick_stoped" from="TouchJoyStick" to="Pata" method="_on_TouchJoyStick_joysctick_stoped"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/Title_DynamicFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/interface/Buttons/CallSceneBtn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/interface/Buttons/QuitBtn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/BigTitle_DynamicFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/interface/Buttons/RetryBtn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/enemis/peixito.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/interface/UI.gd" type="Script" id=10]
+
+[node name="UI" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -130.5
+margin_top = 16.0
+margin_right = 130.5
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.0352941, 0.0196078, 0.0196078, 1 )
+text = "0  - Peixitos"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1189.0
+margin_top = 32.0
+margin_right = -731.0
+margin_bottom = 106.0
+custom_fonts/font = ExtResource( 1 )
+text = "NÃO FIQUE NERVOSO!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Overlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.894118, 0.498039, 0.243137, 0.976471 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseLabel" type="Label" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -296.0
+margin_top = -244.0
+margin_right = 288.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "PAUSE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CallSceneBtn" parent="Overlay" instance=ExtResource( 2 )]
+margin_top = 8.0
+margin_bottom = 136.0
+next_scene_path = "res://src/interface/InitalScreen.tscn"
+
+[node name="RetryBtn" parent="Overlay" instance=ExtResource( 5 )]
+
+[node name="QuitBtn" parent="Overlay" instance=ExtResource( 3 )]
+margin_top = 8.0
+margin_bottom = 128.0
+
+[node name="Peixito" parent="Overlay" instance=ExtResource( 7 )]
+position = Vector2( 952, 912 )
+collision_layer = 0
+collision_mask = 0
+peixito_speed = Vector2( 300, 0 )
+free_space = 500.0
+[connection signal="ready" from="." to="Overlay/Peixito" method="_on_UI_ready"]

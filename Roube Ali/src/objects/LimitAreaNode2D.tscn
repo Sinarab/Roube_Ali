@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="LimitAreaNode2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 0, 128, 0, 1344, 1912, 1344, 1920, 128, 8, 128, 0, -8, 1928, -8, 1928, 1416, -8, 1416, -8, 1291.33, -8, -8 )

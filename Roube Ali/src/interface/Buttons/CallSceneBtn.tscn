@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/IndieFlower.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/icons/home.png" type="Texture" id=2]
+[ext_resource path="res://src/interface/Buttons/CallSceneBtn.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="CallSceneBtn" type="Button"]
+margin_left = 80.0
+margin_right = 208.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 100, 100 )
+theme = SubResource( 2 )
+icon = ExtResource( 2 )
+flat = true
+expand_icon = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="." to="." method="_on_CallSceneBtn_button_up"]
